@@ -9,6 +9,7 @@ export default function Home() {
           Get started by editing&nbsp;
           <code className="font-mono font-bold">app/page.js</code>
         </p>
+        <h2>Viendo si funcinoa</h2>
         <button
           onClick={async () => {
             await signIn("google", {
