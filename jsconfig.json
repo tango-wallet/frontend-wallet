@@ -5,7 +5,8 @@
       "utils/*": ["./utils/*"],
       "constants/*": ["./constants/*"],
       "screen/*": ["./screen/*"],
-      "public/*": ["./public/*"]
+      "public/*": ["./public/*"],
+      "app/*": ["./app/*"]
     }
   }
 }
