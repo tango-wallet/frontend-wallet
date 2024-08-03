@@ -1,10 +1,9 @@
-import ScreenRegister from "screen/auth/register";
-import { signIn } from "next-auth/react";
+import ScreenDashboard from "screen/dashboard";
 
 export default async function MainSSRDashboard() {
   return (
     <main className="">
-      <ScreenRegister />
+      <ScreenDashboard />
     </main>
   );
 }
