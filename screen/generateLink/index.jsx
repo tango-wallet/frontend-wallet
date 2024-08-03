@@ -3,11 +3,11 @@ import { useState } from "react";
 import WarningIcon from "public/WarningIcon.png";
 import Image from "next/image";
 import IconoScrollRounded from "public/IconoScrollRounded.png";
-import useForm from "../../../hooks/useForm";
-import GenerateQR from "app/components/QR/generate";
+import useForm from "../../hooks/useForm";
+import GenerateLinkComponent from "app/components/Link/generate";
 
-export default function ScreenQRDeposit() {
-  const [urlWithParams, setUrlWithParams] = useState(null);
+export default function ScreenGeneraLinkDeposit() {
+  const [linkWithParams, setlinkWithParams] = useState(null);
   const [form, handleChange, resetForm] = useForm({
     amount: "",
     myWallet: "0x1234567890",
@@ -15,16 +15,15 @@ export default function ScreenQRDeposit() {
 
   const handleNextStep = (e) => {
     const hashedParams = `http://localhost:3000/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
-    setUrlWithParams(hashedParams);
+    setlinkWithParams(hashedParams);
   };
-
   return (
     <div
       className={`h-[80vh] min-h-[600px] flex flex-col items-center mx-4 ${
-        !urlWithParams ? "justify-between" : "justify-center"
+        !linkWithParams ? "justify-between" : "justify-center"
       } my-4`}
     >
-      {!urlWithParams && (
+      {!linkWithParams && (
         <>
           <div>
             <div className="flex w-full justify-center my-8">
@@ -34,7 +33,7 @@ export default function ScreenQRDeposit() {
               <div>
                 <form className="w-full text-center">
                   <label className="text-xl text-gray-400 font-semibold">
-                    Puedes ingresar un monto
+                    Ingresa un monto
                   </label>
                   <input
                     type="number"
@@ -72,9 +71,9 @@ export default function ScreenQRDeposit() {
           </div>
         </>
       )}
-      {urlWithParams && (
+      {linkWithParams && (
         <div className="w-full mt-8 flex justify-center">
-          <GenerateQR value={urlWithParams} />
+          <GenerateLinkComponent amount={form.amount} wallet={form.myWallet} />
         </div>
       )}
     </div>
