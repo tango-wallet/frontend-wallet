@@ -8,10 +8,11 @@ export default function ScreenTransferQR() {
   const wallet = searchParams.get("wallet");
 
   return (
-    <div className="text-black">
-      <h1>Transfer</h1>
-      <p>Wallet: {wallet}</p>
-      <p>Amount: {amount}</p>
+    <div>
+      <div className="text-black">
+        <h3>{amount}</h3>
+        <h3>{wallet}</h3>
+      </div>
     </div>
   );
 }
