@@ -24,9 +24,12 @@ const ButtonQRDepoAndWithdrawal = () => {
       >
         Depositar
       </Link>
-      <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold">
+      <Link
+        href={"/protect/transfer/walletoralias"}
+        className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold"
+      >
         Transferir
-      </button>
+      </Link>
     </div>
   );
 };
