@@ -5,7 +5,8 @@ import Image from "next/image";
 import IconoScrollRounded from "public/IconoScrollRounded.png";
 import useForm from "../../../hooks/useForm";
 import GenerateQR from "app/components/QR/generate";
-
+import { NEXT_PUBLIC_REDIRECT_PAYMENT } from "constants/env";
+//
 export default function ScreenQRDeposit() {
   const [urlWithParams, setUrlWithParams] = useState(null);
   const [form, handleChange, resetForm] = useForm({
@@ -14,7 +15,7 @@ export default function ScreenQRDeposit() {
   });
 
   const handleNextStep = (e) => {
-    const hashedParams = `http://localhost:3000/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
+    const hashedParams = `${NEXT_PUBLIC_REDIRECT_PAYMENT}/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
     setUrlWithParams(hashedParams);
   };
 
