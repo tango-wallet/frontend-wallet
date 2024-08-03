@@ -14,7 +14,7 @@ export default function ScreenQRDeposit() {
   });
 
   const handleNextStep = (e) => {
-    const hashedParams = `http://localhost:3000/protect/deposit/qr?amount=${form.amount}&myWallet=${form.myWallet}`;
+    const hashedParams = `http://localhost:3000/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
     setUrlWithParams(hashedParams);
   };
 

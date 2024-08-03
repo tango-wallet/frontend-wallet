@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-
+import { useRouter } from "next/navigation";
 // Styles
 import "./index.css";
 
@@ -14,7 +14,7 @@ export default function ReadQRComponent() {
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
   const [qrOn, setQrOn] = useState(true);
-
+  const router = useRouter();
   // Result
   const [scannedResult, setScannedResult] = useState("");
 
@@ -74,6 +74,12 @@ export default function ReadQRComponent() {
       );
   }, [qrOn]);
 
+  useEffect(() => {
+    if (scannedResult) {
+      window.location.href = scannedResult;
+    }
+  }, [scannedResult]);
+
   return (
     <div className="qr-reader">
       {/* QR */}
@@ -89,19 +95,6 @@ export default function ReadQRComponent() {
       </div>
 
       {/* Show Data Result if scan is success */}
-      {scannedResult && (
-        <p
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 99999,
-            color: "white",
-          }}
-        >
-          Scanned Result: {scannedResult}
-        </p>
-      )}
     </div>
   );
 }
