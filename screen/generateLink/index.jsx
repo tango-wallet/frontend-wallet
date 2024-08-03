@@ -5,6 +5,7 @@ import Image from "next/image";
 import IconoScrollRounded from "public/IconoScrollRounded.png";
 import useForm from "../../hooks/useForm";
 import GenerateLinkComponent from "app/components/Link/generate";
+import { NEXT_PUBLIC_REDIRECT_PAYMENT } from "constants/env";
 
 export default function ScreenGeneraLinkDeposit() {
   const [linkWithParams, setlinkWithParams] = useState(null);
@@ -14,7 +15,7 @@ export default function ScreenGeneraLinkDeposit() {
   });
 
   const handleNextStep = (e) => {
-    const hashedParams = `http://localhost:3000/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
+    const hashedParams = `${NEXT_PUBLIC_REDIRECT_PAYMENT}/protect/transfer/qr?amount=${form.amount}&wallet=${form.myWallet}`;
     setlinkWithParams(hashedParams);
   };
   return (
