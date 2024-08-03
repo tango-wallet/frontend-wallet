@@ -5,6 +5,7 @@ import PersonIconAzul from "public/personiconazul.png";
 import WarningIcon from "public/WarningIcon.png";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ButtonSelect = ({ children, onClick, optionSelectedCurrent }) => {
   return (
@@ -28,20 +29,25 @@ export default function ScreenDeposit() {
       icon: QRIconAzul,
       current: false,
       key: "generarQR",
+      href: "/protect/deposit/qr",
     },
     {
       name: "Generar enlace",
       icon: EnlaceAzul,
       current: false,
       key: "generateLink",
+      href: "/protect/deposit/link",
     },
     {
       name: "Datos de cuenta",
       icon: PersonIconAzul,
       current: false,
       key: "accountData",
+      href: "/protect/deposit/account",
     },
   ];
+
+  const router = useRouter();
 
   return (
     <div className="h-[80vh] flex flex-col items-center mx-4 justify-between my-4">
@@ -54,8 +60,8 @@ export default function ScreenDeposit() {
         {options.map((option, index) => (
           <ButtonSelect
             key={index}
-            onClick={() => setOptionSelected(option.key)}
-            optionSelectedCurrent={optionSelected === option.key}
+            onClick={() => setOptionSelected(option.href)}
+            optionSelectedCurrent={optionSelected === option.href}
           >
             <div className={`flex flex-row items-center`}>
               <Image src={option.icon} alt={option.name} />
@@ -82,6 +88,7 @@ export default function ScreenDeposit() {
           className={`${
             optionSelected != null ? "bg-[#222fe6]" : "bg-slate-600"
           } text-white font-bold py-4 px-6 items-center rounded-lg w-full text-center`}
+          onClick={() => optionSelected && router.push(optionSelected)}
         >
           Continuar
         </button>
