@@ -3,7 +3,8 @@
     "paths": {
       "components/*": ["./components/*"],
       "utils/*": ["./utils/*"],
-      "constants/*": ["./constants/*"]
+      "constants/*": ["./constants/*"],
+      "screen/*": ["./screen/*"]
     }
   }
 }
