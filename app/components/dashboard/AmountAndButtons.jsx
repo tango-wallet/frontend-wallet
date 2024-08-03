@@ -1,11 +1,15 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import QRIcon from "public/QRIcon.png";
 
 const ButtonQRDepoAndWithdrawal = () => {
   return (
     <div className="flex flex-row justify-around mx-4">
-      <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md">
+      <Link
+        className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
+        href={"/protect/readqr"}
+      >
         <Image
           src={QRIcon}
           alt="QR Icon"
@@ -13,7 +17,7 @@ const ButtonQRDepoAndWithdrawal = () => {
           height={80}
           className="h-4 w-4"
         />
-      </button>
+      </Link>
       <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold">
         Depositar
       </button>
