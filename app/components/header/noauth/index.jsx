@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import TangoWalletLetra from "public/tangowalletLetra.png";
 const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
@@ -20,14 +20,14 @@ export default function HeaderNoAuth() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/auth/login" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img
-              alt=""
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-              className="h-8 w-auto"
+            <Image
+              src={TangoWalletLetra}
+              alt="Tango Wallet Letra"
+              className="w-8 h-8"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button

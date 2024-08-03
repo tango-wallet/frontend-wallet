@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import TangoWalletLetra from "public/tangowalletLetra.png";
+import Link from "next/link";
+import Image from "next/image";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -24,17 +27,19 @@ export default function HeaderAuth() {
         <header className="">
           <nav
             aria-label="Global"
-            className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+            className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 flex-row-reverse"
           >
             <div className="flex lg:flex-1">
-              <a href="#" className="-m-1.5 p-1.5">
+              <Link href="/protect/dashboard" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
-                  alt=""
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
+                <Image
+                  src={TangoWalletLetra}
+                  alt="Tango Wallet Letra"
+                  width={900}
+                  height={900}
+                  className="w-16 h-16"
                 />
-              </a>
+              </Link>
             </div>
             <div className="flex lg:hidden">
               <button
@@ -43,7 +48,7 @@ export default function HeaderAuth() {
                 className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
               >
                 <span className="sr-only">Open main menu</span>
-                <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+                <Bars3Icon aria-hidden="true" className="h-8 w-8" />
               </button>
             </div>
             <div className="hidden lg:flex lg:gap-x-12">
