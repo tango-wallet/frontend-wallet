@@ -1,9 +1,12 @@
+"use client";
 import Image from "next/image";
 import TangoWalletIcon from "public/TangoWalletIcon.png";
 import iconCopyPaste from "public/copypacteicon.png";
 import WarningIcon from "public/WarningIcon.png";
+import { useRouter } from "next/navigation";
 
 export default function GenerateLinkComponent({ amount, wallet }) {
+  const router = useRouter();
   return (
     <div className="h-[70vh] flex justify-between flex-col">
       <div className="text-black border rounded-2xl border-[#D1D1D1] p-4">
@@ -52,6 +55,12 @@ export default function GenerateLinkComponent({ amount, wallet }) {
           </p>
         </div>
       </div>
+      <button
+        onClick={() => router.push("/protect/dashboard")}
+        className="bg-black text-white font-bold py-4 px-6 items-center rounded-lg text-center mt-4 w-full" //bg-black text-white font-bold py-4 px-6 items-center rounded-lg text-center mt-8
+      >
+        Volver al inicio
+      </button>
     </div>
   );
 }
