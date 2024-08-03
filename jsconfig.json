@@ -4,7 +4,8 @@
       "components/*": ["./components/*"],
       "utils/*": ["./utils/*"],
       "constants/*": ["./constants/*"],
-      "screen/*": ["./screen/*"]
+      "screen/*": ["./screen/*"],
+      "public/*": ["./public/*"]
     }
   }
 }
