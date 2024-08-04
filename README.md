@@ -1,4 +1,4 @@
-# Frontend
+# Frontend TANGO WALLET
 
 ### Link: tangowallet.sitio
 
@@ -39,3 +39,12 @@
 
 > [!NOTE]
 > Dentro de la opción transferir, podemos realizar transferencias a otras cuentas con solo dos elementos: el alias o wallet y el monto.
+
+### Ejecucion
+
+1. git clone https://github.com/tango-wallet/frontend-wallet.git
+2. npm install
+3. npm run dev
+
+> Este proyecto pose .ENV y los que debera tener estan en el .env.example
+> Tecnologias utilizadas: NextJS 14.x.x , Javascript y Tailwind
