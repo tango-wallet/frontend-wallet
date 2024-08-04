@@ -27,8 +27,19 @@ export default function HeaderAuth() {
         <header className="">
           <nav
             aria-label="Global"
-            className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 flex-row-reverse"
+            className="flex justify-between items-center self-stretch flex-grow-0 flex-shrink-0 h-14 relative px-4 py-2"
           >
+            
+            <div className="flex lg:hidden">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(true)}
+                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
+              >
+                <span className="sr-only">Open main menu</span>
+                <Bars3Icon aria-hidden="true" className="h-8 w-8" />
+              </button>
+            </div>
             <div className="flex lg:flex-1">
               <Link href="/protect/dashboard" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
@@ -40,16 +51,6 @@ export default function HeaderAuth() {
                   className="w-16 h-16"
                 />
               </Link>
-            </div>
-            <div className="flex lg:hidden">
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
-              >
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon aria-hidden="true" className="h-8 w-8" />
-              </button>
             </div>
             <div className="hidden lg:flex lg:gap-x-12">
               {navigation.map((item) => (
