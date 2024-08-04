@@ -1,23 +1,19 @@
 const { ethers } = require("ethers");
 const bip39 = require("bip39");
+
+const ecc = require("tiny-secp256k1");
 const { BIP32Factory } = require("bip32");
-const secp256k1 = require("@bitcoinerlab/secp256k1");
 const { NEXT_PUBLIC_BACKEND } = require("constants/env");
+// You must wrap a tiny-secp256k1 compatible implementation
+const bip32 = BIP32Factory(ecc);
 
-// Verifica la implementación de secp256k1
-console.log("secp256k1:", secp256k1);
-console.log("secp256k1.isPoint:", secp256k1.isPoint);
-
-// Wrap the @bitcoinerlab/secp256k1 implementation
-const bip32 = BIP32Factory(secp256k1);
-
-//Tarea Seba: address del usuario asociado al contrato en la DB
+//Tarea Seba: addres del usuario asociado al contrato en la DB
 const generateSeedPhrase = (token) => {
   // Generate entropy from token
   const numericArray = convertBinaryToNumber(token, 8);
   const entropy = toByteArray(numericArray);
 
-  // Generate 12-word mnemonic
+  // Generate 12 worlds mnemonic
   const mnemonic = bip39.entropyToMnemonic(
     entropy.slice(7, 23),
     bip39.wordlists.EN
@@ -34,7 +30,7 @@ const loadAccount = (mnemonic, accountIndex) => {
     const root = bip32.fromSeed(seed);
 
     // Derive a private key and address using the BIP44 standard route for Ethereum
-    const path = `m/44'/60'/0'/0/${accountIndex}`; // First account
+    const path = "m/44'/60'/0'/0/" + accountIndex; // First account
     const node = root.derivePath(path);
     const privateKey = node.privateKey.toString("hex");
 
@@ -65,9 +61,15 @@ const createSmartWallet = async (accountAddress, email) => {
       body: JSON.stringify({ address: accountAddress, email }),
     });
 
+    // Check response
+    if (!response.ok) {
+      throw new Error("Backend request failed");
+    }
+
+    // Get response data
     const data = await response.json();
 
-    // Get Smart Wallet address from data
+    // Get Samrt Wallet address from data
     const smart_wallet_address = data.contractAddress;
     return smart_wallet_address;
   } catch (error) {
@@ -76,7 +78,7 @@ const createSmartWallet = async (accountAddress, email) => {
   }
 };
 
-// Auxiliary Functions
+/// Aux functions
 
 function stringToBinary(str) {
   console.log("str", str);
