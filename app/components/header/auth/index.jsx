@@ -5,7 +5,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import TangoWalletLetra from "public/tangowalletLetra.png";
 import Link from "next/link";
 import Image from "next/image";
-
+import { signOut } from "next-auth/react";
+import { NEXT_PUBLIC_REDIRECT_PAYMENT } from "constants/env";
 const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
@@ -20,6 +21,12 @@ export default function HeaderAuth() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const logoutHandler = async () => {
+    await signOut({
+      callbackUrl: `${NEXT_PUBLIC_REDIRECT_PAYMENT}/auth/login`,
+    });
+  };
 
   return (
     <>
@@ -99,15 +106,9 @@ export default function HeaderAuth() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/25">
                   <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    <button onClick={() => logoutHandler()}>
+                      Cerrar session
+                    </button>
                   </div>
                   <div className="py-6">
                     <a
