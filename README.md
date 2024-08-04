@@ -48,3 +48,21 @@
 
 > Este proyecto pose .ENV y los que debera tener estan en el .env.example
 > Tecnologias utilizadas: NextJS 14.x.x , Javascript y Tailwind
+
+# Backend TANGO WALLET
+
+1. Solo poseemos endpoint que integra todas las acciones de un usuario como registro, y update en campos del modelo
+
+ENDPOINT
+
+- `https://argcoupon.xyz/user`
+  Ejemplo: `https://argcoupon.xyz/user/info/user/:id`
+
+2. Rutas de usuarios
+
+   - `/login`
+   - `/register`
+   - `/info/user/:id`
+   - `/update/address`
+
+3. Los ENV necesarios se encuentran en `.env.example`
