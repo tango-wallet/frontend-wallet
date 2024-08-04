@@ -8,9 +8,11 @@ import {
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import generateSeedPhrase, {
+/*import generateSeedPhrase, {
   createSmartWallet,
-} from "../../../../util/generateSeedPhrase";
+} from "../../../../util/generateSeedPhrase";*/
+
+const { generateSeedPhrase, createSmartWallet, loadAccount } = require("../../../../util/generateSeedPhrase");
 
 export const authOptions = {
   session: {
@@ -89,7 +91,7 @@ export const authOptions = {
           console.log("------------------------------------------");
           console.log("ID Token de google: ", account.id_token);
           console.log("------------------------------------------");
-          const response = await fetch(
+          /*const response = await fetch(
             `${NEXT_PUBLIC_BACKEND}/users/login/google`,
             {
               method: "POST",
@@ -111,42 +113,38 @@ export const authOptions = {
 
           if (data.user._id) {
             account.id = data.user._id;
-          }
+          }*/
 
           const keyData = {
             privateKey: "",
-            publicKey: "",
             address: "",
           };
 
-          if (data.register) {
+            // data.register
+          if (false) {  // Login
             const seedPhareStorage = localStorage.getItem("seedPhrase");
-            const { privateKey, publicKey, address } =
-              await loadAccountBlockchain(seedPhareStorage);
+            const { privateKey, address } = await loadAccount(seedPhareStorage);
+            keyData.privateKey = privateKey;
+            keyData.address = address;
+          } else {  // Register
+            const seedPhrase = generateSeedPhrase("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
+            //localStorage.setItem("seedPhrase", seedPhrase);
+
+            const { privateKey, address } = loadAccount(seedPhrase, 0);
 
             keyData.privateKey = privateKey;
-            keyData.publicKey = publicKey;
-            keyData.address = address;
-          } else {
-            const seedPhrase = await generateSeedPhrase(data.token);
-            localStorage.setItem("seedPhrase", seedPhrase);
-            const { privateKey, publicKey, address } =
-              await loadAccountBlockchain(seedPhrase);
-
-            keyData.privateKey = privateKey;
-            keyData.publicKey = publicKey;
             keyData.address = address;
 
-            await createSmartWallet(address);
+            const smart_wallet_address = await createSmartWallet(address);
           }
 
-          account.accessToken = data.token;
+          //account.accessToken = data.token;
           account.privateKey = keyData.privateKey;
-          account.publicKey = keyData.publicKey;
           account.address = keyData.address;
+          account.smart_wallet_address = smart_wallet_address;
 
           return {
-            id: data.user._id,
+            id: "test", //data.user._id,
             provider: "google",
           };
         }
