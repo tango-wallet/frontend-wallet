@@ -1,5 +1,10 @@
 # Frontend
 
+### Link: tangowallet.sitio
+
+> [!CAUTION]
+> Ingresar desde mobile, ya que el diseño esta hecho para este
+
 ```
 -- Login / Register
                     -- Dashboard -
