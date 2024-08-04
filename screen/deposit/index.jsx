@@ -6,14 +6,21 @@ import WarningIcon from "public/WarningIcon.png";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import PaymentMP from "public/paymentsmp.png";
 
-const ButtonSelect = ({ children, onClick, optionSelectedCurrent }) => {
+const ButtonSelect = ({
+  children,
+  onClick,
+  optionSelectedCurrent,
+  addClassname,
+}) => {
   return (
     <button
       onClick={onClick}
       className={`${
         optionSelectedCurrent ? "bg-[#878dd8]" : "bg-[#f6f6f6]"
-      } text-black font-bold py-4 px-6 items-center flex flex-row rounded-lg my-6 w-full`} // w-64
+      } text-black font-bold py-4 px-6 items-center flex flex-row rounded-lg my-3 w-full ${addClassname}`} // w-64
     >
       {children}
     </button>
@@ -47,29 +54,55 @@ export default function ScreenDeposit() {
     },
   ];
 
+  const optionsDeposits = [
+    {
+      name: "Mercado pago",
+      icon: PaymentMP,
+      current: false,
+      key: "marketPayment",
+      href: "/protect/deposit",
+    },
+  ];
   const router = useRouter();
 
   return (
-    <div className="flex flex-col justify-start items-start self-stretch flex-grow gap-8 p-4">
+    <div className="flex flex-col justify-around items-start self-stretch flex-grow gap-8 p-4 mt-12">
       <div>
-      <p class="flex-grow w-[296px] text-base font-medium text-left text-[#454545]">
-  ¿Cómo quieres generar la dirección de depósito?
-</p>
+        <p class="flex-grow w-full text-base font-medium text-[#454545] text-center">
+          ¿Cómo quieres generar la dirección de depósito?
+        </p>
       </div>
       <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-4 p-4 rounded-2xl">
-      <p class="flex-grow-0 flex-shrink-0 w-[296px] text-[11px] font-medium text-left text-[#454545]">
-    Recibir
-  </p>
+        <p class="flex-grow-0 flex-shrink-0 w-[296px] text-[11px] font-medium text-left text-[#454545]">
+          Recibir
+        </p>
         {options.map((option, index) => (
           <ButtonSelect
             key={index}
             onClick={() => setOptionSelected(option.href)}
             optionSelectedCurrent={optionSelected === option.href}
           >
-            <div className={`flex flex-row items-center`}>
+            <Link className={`flex flex-row items-center`} href={option.href}>
               <Image src={option.icon} alt={option.name} />
               <span className="mx-2">{option.name}</span>
-            </div>
+            </Link>
+          </ButtonSelect>
+        ))}
+        <p class="flex-grow-0 flex-shrink-0 w-[296px] text-[11px] font-medium text-left text-[#454545]">
+          Depositar
+        </p>
+        {optionsDeposits.map((option, index) => (
+          <ButtonSelect
+            key={index}
+            onClick={() => setOptionSelected("")}
+            optionSelectedCurrent={optionSelected === option.href}
+            addClassname="opacity-50"
+          >
+            <Link className={`flex flex-row items-center`} href={option.href}>
+              <Image src={option.icon} alt={option.name} />
+              <span className="mx-2">{option.name}</span>
+              <span className="text-sm font-normal">Pronto</span>
+            </Link>
           </ButtonSelect>
         ))}
       </div>
@@ -85,16 +118,6 @@ export default function ScreenDeposit() {
             evitar pérdidas de fondos.
           </p>
         </div>
-      </div>
-      <div className="w-full">
-        <button
-          className={`${
-            optionSelected != null ? "bg-[#222fe6]" : "bg-slate-600"
-          } text-white font-bold py-4 px-6 items-center rounded-lg w-full text-center`}
-          onClick={() => optionSelected && router.push(optionSelected)}
-        >
-          Continuar
-        </button>
       </div>
     </div>
   );
