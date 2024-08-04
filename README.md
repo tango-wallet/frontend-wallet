@@ -47,6 +47,7 @@
 3. npm run dev
 
 > Este proyecto pose .ENV y los que debera tener estan en el .env.example
+
 > Tecnologias utilizadas: NextJS 14.x.x , Javascript y Tailwind
 
 # Backend TANGO WALLET
